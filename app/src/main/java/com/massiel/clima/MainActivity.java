@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -24,11 +25,26 @@ public class MainActivity extends Activity {
                 EditText editText_ciudad = (EditText) findViewById(R.id.editText_ciudad);
                 String ciudad = editText_ciudad.getText().toString();
 
+                int temperatura = temperatura();
+
+                int icon;
+                if(temperatura >= 25 )
+                    icon = R.drawable.sunny;
+                else
+                    icon = R.drawable.cloudy;
+
+                TextView textMensaje = (TextView)findViewById(R.id.text_message);
+                textMensaje.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+                textMensaje.setText(String.valueOf(temperatura) + " C");
+                textMensaje.setVisibility(View.VISIBLE);
                 Toast.makeText(MainActivity.this,ciudad, Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    private int temperatura() {
+        return (int) (Math.random() * 20 + 20);
+    }
 
 }
 
